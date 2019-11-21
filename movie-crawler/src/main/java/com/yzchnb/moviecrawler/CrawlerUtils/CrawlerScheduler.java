@@ -66,7 +66,7 @@ public class CrawlerScheduler {
         initFinshed.initFinished(finishedProductIds);
     }
 
-    @Scheduled(fixedRate = 3000)
+    @Scheduled(fixedRate = 1500)
     @Async
     public void doCrawl() {
         boolean told = false;
