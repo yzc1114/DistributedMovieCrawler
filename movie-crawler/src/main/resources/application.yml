@@ -1,10 +1,14 @@
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://58.87.96.195:8761/eureka/
 server:
   port: 8760
 
-ribbon:
-  ConnectTimeout: 50000
-  ReadTimeout: 50000
+feign:
+  url: http://58.87.96.195:8762
+  client:
+    config:
+      default:
+        connectTimeout: 50000
+        readTimeout: 50000

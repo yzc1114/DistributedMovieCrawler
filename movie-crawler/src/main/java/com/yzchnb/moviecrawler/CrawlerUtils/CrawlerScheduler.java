@@ -59,11 +59,14 @@ public class CrawlerScheduler {
                 builder.append(productId);
                 builder.append(',');
             }
+            if(builder.length() >= 1000){
+                builder.deleteCharAt(builder.length() - 1);
+                String finishedProductIds = builder.toString();
+                System.out.println(finishedProductIds);
+                initFinshed.initFinished(finishedProductIds);
+                builder = new StringBuilder();
+            }
         }
-        builder.deleteCharAt(builder.length() - 1);
-        String finishedProductIds = builder.toString();
-        System.out.println(finishedProductIds);
-        initFinshed.initFinished(finishedProductIds);
     }
 
     @Scheduled(fixedRate = 1500)

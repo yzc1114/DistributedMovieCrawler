@@ -15,16 +15,16 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 @Component
 public class ProductIdManager {
 
-    private ConcurrentLinkedQueue<ProductId> idQueue = new ConcurrentLinkedQueue<>();
+    private static final ConcurrentLinkedQueue<ProductId> idQueue = new ConcurrentLinkedQueue<>();
 
-    private final HashMap<String, ProductId> crawlingProducts = new HashMap<>();
+    private static final HashMap<String, ProductId> crawlingProducts = new HashMap<>();
 
-    @PostConstruct
-    public void initProductIds(){
+    public static void initProductIds(){
         idQueue.clear();
         String productIdsCsvFilePath = SettingsManager.getCsvFilePath();
         File productIdsCsvFile = new File(productIdsCsvFilePath);
         try{
+            System.out.println(productIdsCsvFile.getAbsoluteFile());
             if(!productIdsCsvFile.exists()){
                 throw new IOException("productIds.csv 不存在！！！！！！！");
             }
@@ -39,7 +39,9 @@ public class ProductIdManager {
             }
         }catch (IOException e){
             e.printStackTrace();
+            System.exit(-1);
         }
+        System.out.println("product-id-extractor 初始化完毕");
     }
 
     public String getProductId(){

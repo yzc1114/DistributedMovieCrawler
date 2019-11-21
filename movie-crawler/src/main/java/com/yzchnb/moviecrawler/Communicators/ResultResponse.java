@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@FeignClient(value = "product-id-extractor")
+@FeignClient(value = "product-id-extractor", url = "${feign.url}")
 public interface ResultResponse {
     @RequestMapping(value = "/report/{productId}/{status}",method = RequestMethod.GET)
     String sendResponse(@PathVariable String productId, @PathVariable String status);
