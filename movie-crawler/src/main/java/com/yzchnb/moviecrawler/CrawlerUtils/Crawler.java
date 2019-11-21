@@ -16,8 +16,6 @@ import java.util.concurrent.Executors;
 @Component
 public class Crawler {
 
-    private static String htmlBaseDirPath = SettingsManager.getHtmlBaseDirPath();
-
     private static String[] userAgents = {"Mozilla/5.0 (Windows NT 6.1; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0",
             "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.87 Safari/537.36 OPR/37.0.2178.32",
             "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.57.2 (KHTML, like Gecko) Version/5.1.7 Safari/534.57.2",
@@ -70,12 +68,15 @@ public class Crawler {
     }
 
     private boolean saveDoc(Document doc, String productId){
+        System.out.println("爬取：" + productId + " 成功");
+        String htmlBaseDirPath = SettingsManager.getHtmlBaseDirPath();
         File htmlBaseDir = new File(htmlBaseDirPath);
         if(!htmlBaseDir.exists()){
             htmlBaseDir.mkdir();
         }
         try{
             File htmlFile = new File(htmlBaseDirPath + "/" + productId + ".html");
+            System.out.println("存入文件：" + htmlFile.getAbsolutePath());
             if(htmlFile.exists()){
                 return true;
             }

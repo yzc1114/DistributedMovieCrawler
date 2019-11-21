@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.io.File;
+import java.util.Set;
 
 @Component
 @Configuration
@@ -35,11 +36,21 @@ public class CrawlerScheduler {
 
     private int currCrawlingNum = 0;
 
-    private static String htmlBaseDirPath = SettingsManager.getHtmlBaseDirPath();
 
-    @PostConstruct
-    public void initFinished(){
+    private boolean initFinished = false;
+    private static boolean entered = false;
+
+    private void initFinished(){
+        if(entered){
+            return;
+        }
+        entered = true;
         //Tell the productIdExtractor that some productIds had been crawled
+        if(!SettingsManager.getInitOver()){
+            System.out.println("未初始化完毕就开始发送信息。");
+            System.exit(-1);
+        }
+        String htmlBaseDirPath = SettingsManager.getHtmlBaseDirPath();
         File htmlsDir = new File(htmlBaseDirPath);
         if(!htmlsDir.exists()){
             System.out.println("htmls文件夹不存在！");
@@ -67,13 +78,19 @@ public class CrawlerScheduler {
                 builder = new StringBuilder();
             }
         }
+        System.out.println("向服务器声明已爬取完毕的id完毕。");
+        initFinished = true;
     }
 
     @Scheduled(fixedRate = 1500)
-    @Async
+    @Async("scheduledPoolTaskExecutor")
     public void doCrawl() {
         boolean told = false;
         if(!SettingsManager.getInitOver()){
+            return;
+        }
+        if(!initFinished){
+            this.initFinished();
             return;
         }
         if(currCrawlingNum >= maxCrawlingNum){
