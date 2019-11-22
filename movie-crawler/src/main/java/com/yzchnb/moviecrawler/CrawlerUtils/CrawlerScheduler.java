@@ -54,6 +54,8 @@ public class CrawlerScheduler {
         File htmlsDir = new File(htmlBaseDirPath);
         if(!htmlsDir.exists()){
             System.out.println("htmls文件夹不存在！");
+            htmlsDir.mkdir();
+            initFinished = true;
             return;
         }
         String[] listed = htmlsDir.list((f, s) ->
@@ -61,6 +63,7 @@ public class CrawlerScheduler {
         );
         if(listed == null || listed.length == 0){
             System.out.println("htmls文件夹为空。");
+            initFinished = true;
             return;
         }
         StringBuilder builder = new StringBuilder();
