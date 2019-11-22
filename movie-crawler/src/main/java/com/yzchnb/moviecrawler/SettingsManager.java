@@ -61,7 +61,7 @@ public class SettingsManager {
             }
             File htmlBaseDir = new File(newPath, "htmls");
             if(!htmlBaseDir.exists()){
-                htmlBaseDir.createNewFile();
+                htmlBaseDir.mkdir();
             }
             htmlBaseDirPath = htmlBaseDir.getAbsolutePath();
         }catch (IOException e){

@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3ddb2f8c-80fe-4747-a33c-c601e833cc11" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="3ddb2f8c-80fe-4747-a33c-c601e833cc11" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/eureka-server/target/" />
@@ -16,8 +14,77 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="DefaultGradleProjectSettings">
-    <option name="testRunner" value="GRADLE" />
-    <option name="delegatedBuild" value="true" />
+    <option name="isMigrated" value="true" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/movie-crawler/src/main/java/com/yzchnb/moviecrawler/CrawlerUtils/TimerConfig.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/movie-crawler/src/main/java/com/yzchnb/moviecrawler/CrawlerUtils/CrawlerScheduler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="257">
+              <caret line="54" column="31" selection-start-line="54" selection-start-column="31" selection-end-line="54" selection-end-column="31" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/movie-crawler/src/main/resources/application.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" selection-start-line="6" selection-end-line="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/movie-crawler/src/main/resources/settings.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="43" selection-start-column="43" selection-end-column="43" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/movie-crawler/src/main/java/com/yzchnb/moviecrawler/WebController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="640">
+              <caret line="44" column="5" selection-start-line="44" selection-start-column="5" selection-end-line="44" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/movie-crawler/src/main/java/com/yzchnb/moviecrawler/SettingsManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="840">
+              <caret line="64" column="13" selection-start-line="64" selection-start-column="13" selection-end-line="64" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -53,7 +120,6 @@
         <option value="$PROJECT_DIR$/movie-crawler/src/main/java/com/yzchnb/moviecrawler/Crawler.java" />
         <option value="$PROJECT_DIR$/movie-crawler/src/main/java/com/yzchnb/moviecrawler/CrawlerScheduler.java" />
         <option value="$PROJECT_DIR$/movie-crawler/src/main/resources/baseDir.properties" />
-        <option value="$PROJECT_DIR$/movie-crawler/src/main/resources/settings.properties" />
         <option value="$PROJECT_DIR$/product-id-extractor/src/main/resources/baseDir.properties" />
         <option value="$PROJECT_DIR$/product-id-extractor/src/main/java/com/yzchnb/productidextractor/DirManager.java" />
         <option value="$PROJECT_DIR$/product-id-extractor/src/main/java/com/yzchnb/productidextractor/SettingManager.java" />
@@ -79,6 +145,7 @@
         <option value="$PROJECT_DIR$/movie-crawler/src/main/java/com/yzchnb/moviecrawler/MovieCrawlerApplication.java" />
         <option value="$PROJECT_DIR$/movie-crawler/src/main/java/com/yzchnb/moviecrawler/CrawlerUtils/TimerConfig.java" />
         <option value="$PROJECT_DIR$/movie-crawler/src/main/java/com/yzchnb/moviecrawler/CrawlerUtils/CrawlerScheduler.java" />
+        <option value="$PROJECT_DIR$/movie-crawler/src/main/resources/settings.properties" />
       </list>
     </option>
   </component>
@@ -108,6 +175,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -116,62 +184,10 @@
               <item name="DistributedMovieCrawler" type="b2602c69:ProjectViewProjectNode" />
               <item name="DistributedMovieCrawler" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="DistributedMovieCrawler" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DistributedMovieCrawler" type="462c0819:PsiDirectoryNode" />
-              <item name="movie-crawler" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DistributedMovieCrawler" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DistributedMovieCrawler" type="462c0819:PsiDirectoryNode" />
-              <item name="movie-crawler" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DistributedMovieCrawler" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DistributedMovieCrawler" type="462c0819:PsiDirectoryNode" />
-              <item name="movie-crawler" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DistributedMovieCrawler" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DistributedMovieCrawler" type="462c0819:PsiDirectoryNode" />
-              <item name="movie-crawler" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DistributedMovieCrawler" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DistributedMovieCrawler" type="462c0819:PsiDirectoryNode" />
-              <item name="movie-crawler" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="moviecrawler" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DistributedMovieCrawler" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DistributedMovieCrawler" type="462c0819:PsiDirectoryNode" />
-              <item name="movie-crawler" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="moviecrawler" type="462c0819:PsiDirectoryNode" />
-              <item name="CrawlerUtils" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DistributedMovieCrawler" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DistributedMovieCrawler" type="462c0819:PsiDirectoryNode" />
-              <item name="movie-crawler" type="462c0819:PsiDirectoryNode" />
-              <item name="target" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -247,16 +263,17 @@
       <updated>1574225313825</updated>
       <workItem from="1574225315101" duration="24427000" />
       <workItem from="1574388710171" duration="965000" />
+      <workItem from="1574394499112" duration="375000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25392000" />
+    <option name="totallyTimeSpent" value="25767000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="48" y="23" width="1392" height="877" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.33547926" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.34" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -266,7 +283,7 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.4120482" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.5146497" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.42289156" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -282,7 +299,7 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Maven" order="3" visible="true" weight="0.19170243" />
+      <window_info anchor="right" id="Maven" order="3" visible="true" weight="0.19111112" />
       <window_info anchor="right" id="Palette" order="4" />
       <window_info anchor="right" id="Cargo" order="5" />
       <window_info anchor="right" id="Database" order="6" />
@@ -436,13 +453,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/movie-crawler/src/main/resources/settings.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="43" selection-start-column="43" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/product-id-extractor/src/main/resources/application.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -471,13 +481,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="30" column="42" selection-start-line="30" selection-start-column="42" selection-end-line="30" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/movie-crawler/src/main/resources/application.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
         </state>
       </provider>
     </entry>
@@ -518,9 +521,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/movie-crawler/src/main/java/com/yzchnb/moviecrawler/CrawlerUtils/Crawler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="52" selection-start-line="52" selection-end-line="52" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movie-crawler/src/main/java/com/yzchnb/moviecrawler/CrawlerUtils/TimerConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/movie-crawler/src/main/java/com/yzchnb/moviecrawler/WebController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="660">
+        <state relative-caret-position="640">
           <caret line="44" column="5" selection-start-line="44" selection-start-column="5" selection-end-line="44" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -538,33 +561,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/movie-crawler/src/main/java/com/yzchnb/moviecrawler/CrawlerUtils/TimerConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/movie-crawler/src/main/java/com/yzchnb/moviecrawler/CrawlerUtils/CrawlerScheduler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="87" selection-start-line="87" selection-end-line="87" />
+        <state relative-caret-position="257">
+          <caret line="54" column="31" selection-start-line="54" selection-start-column="31" selection-end-line="54" selection-end-column="31" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/movie-crawler/src/main/java/com/yzchnb/moviecrawler/CrawlerUtils/Crawler.java">
+    <entry file="file://$PROJECT_DIR$/movie-crawler/src/main/resources/application.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="52" selection-start-line="52" selection-end-line="52" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="90">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movie-crawler/src/main/resources/settings.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="43" selection-start-column="43" selection-end-column="43" />
         </state>
       </provider>
     </entry>
