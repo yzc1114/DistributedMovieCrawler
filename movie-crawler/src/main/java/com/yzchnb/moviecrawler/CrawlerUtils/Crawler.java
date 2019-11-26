@@ -4,10 +4,14 @@ import com.yzchnb.moviecrawler.SettingsManager;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
 
+import javax.print.Doc;
 import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
@@ -15,6 +19,8 @@ import java.util.concurrent.Executors;
 
 @Component
 public class Crawler {
+
+    private final static String amazonHost = "https://www.amazon.com";
 
     private static String[] userAgents = {"Mozilla/5.0 (Windows NT 6.1; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0",
             "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.87 Safari/537.36 OPR/37.0.2178.32",
@@ -32,26 +38,36 @@ public class Crawler {
             "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36 TheWorld 7",
             "Mozilla/5.0 (Windows NT 6.1; W…) Gecko/20100101 Firefox/60.0"};
 
-    private Map<String, String> cookies = new HashMap<>();
 
     private Random random = new Random();
 
     public boolean crawlOneProduct(String productId){
         String baseUrl = "https://www.amazon.com/gp/product/";
         try{
+            String ua = userAgents[random.nextInt(userAgents.length)];
             Connection.Response response;
                 response = Jsoup.connect(baseUrl + productId).timeout(30000)
                         .method(Connection.Method.GET)
-                        .cookies(cookies)
-                        .header("user-agent", userAgents[random.nextInt(userAgents.length)])
+                        .header("user-agent", ua)
                         .execute();
 
-            cookies = response.cookies();
+            Map<String, String> cookies = response.cookies();
 
             Document doc = response.parse();
             if(!checkValidity(doc)){
                 System.out.println("爬取 " + productId + " 失败，原因：检测到机器人");
-                return false;
+                if(!SettingsManager.isUseRecognition()){
+                    return false;
+                }
+                doc = parseCaptchaAndSend(doc, productId, cookies, ua);
+                if(doc == null){
+                    System.out.println("识别" + productId + "的验证码的过程中出现问题！");
+                    return false;
+                }
+                if(!checkValidity(doc)){
+                    System.out.println("验证码识别：" + productId + " 验证也失败了！");
+                    return false;
+                }
             }
             return saveDoc(doc, productId);
         }catch (IOException e){
@@ -91,5 +107,100 @@ public class Crawler {
             return false;
         }
         return true;
+    }
+
+    private Document parseCaptchaAndSend(Document doc, String productId, Map<String, String> cookies, String ua){
+        Elements formEle = doc.select("body > div > div.a-row.a-spacing-double-large > div.a-section > div > div > form");
+        if(formEle.size() != 1){
+            return null;
+        }
+        Element form = formEle.first();
+        String url = amazonHost + form.attr("action");
+        Elements inputs = form.select("input");
+        Element img = form.select("img").first();
+        if(img == null){
+            return null;
+        }
+        String imgSrc = img.attr("src");
+        //DONE 下载图片
+        String imgPath = downloadImg(SettingsManager.getTempCaptchaDirPath(), productId, imgSrc);
+        //DONE 进行识别
+        if(imgPath == null){
+            return null;
+        }
+        File imgFile = new File(imgPath);
+        if(!imgFile.exists()){
+            return null;
+        }
+        String result = recognize(imgPath);
+        //imgFile.delete();
+        System.out.println("解析 " + productId + " 的验证码，获得结果：" + result);
+        Map<String, String> params = new HashMap<>();
+        for (Element input : inputs) {
+            if(input.attr("name").equals("amzn")){
+                params.put("amzn", input.attr("value"));
+            }else if(input.attr("name").equals("amzn-r")){
+                params.put("amzn-r", input.attr("value"));
+            }else if(input.attr("id").equals("captchacharacters")){
+                params.put("field-keywords", result);
+            }
+        }
+        if(inputs.size() != 3){
+            return null;
+        }
+        url += "?amzn=" + params.get("amzn") + "&amzn-r=" + params.get("amzn-r") + "&field-keywords=" + params.get("field-keywords");
+        try{
+            Connection.Response response = Jsoup.connect(url)
+                    .cookies(cookies)
+                    .header("user-agent", ua)
+                    .timeout(30000)
+                    .execute();
+            return response.parse();
+
+        }catch (IOException e){
+            //e.printStackTrace();
+            return null;
+        }
+    }
+
+    private static String downloadImg(String dir, String productId, String src){
+        try{
+            URL url = new URL(src);
+            //链接网络地址
+            HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+            //获取链接的输出流
+            InputStream is = connection.getInputStream();
+            //创建文件，fileName为编码之前的文件名
+            File file = new File(dir, productId + ".jpg");
+            //根据输入流写入文件
+            FileOutputStream out = new FileOutputStream(file);
+            int i = 0;
+            while((i = is.read()) != -1){
+                out.write(i);
+            }
+            out.close();
+            is.close();
+            return file.getAbsolutePath();
+        }catch (Exception e){
+            System.out.println("下载图片过程中出错！");
+            return null;
+        }
+    }
+
+    private static String recognize(String imgPath){
+        Map<String, String> data = new HashMap<>();
+        data.put("path", imgPath);
+        try{
+            String captcha = Jsoup.connect("http://localhost:8759/recognize").method(Connection.Method.POST).timeout(600000).data(data).execute().body();
+            return captcha.toUpperCase();
+        }catch (IOException e){
+            System.out.println("连接Flask服务器进行识别时出现问题！");
+            return null;
+        }
+    }
+
+    public static void main(String[] args) {
+        Crawler crawler = new Crawler();
+        crawler.crawlOneProduct("0005445825");
     }
 }

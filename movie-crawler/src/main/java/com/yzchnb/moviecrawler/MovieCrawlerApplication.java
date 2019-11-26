@@ -18,6 +18,9 @@ public class MovieCrawlerApplication {
         try{
             System.out.println("使用参数路径：" + args[0]);
             SettingsManager.setBaseDirPath(args[0]);
+            if(args.length >= 2){
+                SettingsManager.setUseRecognition(true);
+            }
         }catch (ArrayIndexOutOfBoundsException e){
             System.out.println("使用默认路径");
         }

@@ -11,8 +11,10 @@ import java.util.Properties;
 public class SettingsManager {
     private static String baseDirPath;
     private static String htmlBaseDirPath;
+    private static String tempCaptchaDirPath;
     private static int crawlerThreadsNum;
     private static boolean initOver = false;
+    private static boolean useRecognition = false;
     static {
         try {
             Properties props = new Properties();
@@ -20,7 +22,9 @@ public class SettingsManager {
             baseDirPath = props.getProperty("baseDir");
             crawlerThreadsNum = Integer.parseInt(props.getProperty("CrawlerThreadsNum"));
             htmlBaseDirPath = baseDirPath + "htmls";
+            tempCaptchaDirPath = baseDirPath + "captchas";
             File htmlBaseDir = new File(htmlBaseDirPath);
+            File tempCaptchaDir = new File(tempCaptchaDirPath);
             File baseDir = new File(baseDirPath);
             if(!baseDir.exists()){
                 System.out.println("默认文件夹不存在！需要使用命令行参数获得文件夹路径。");
@@ -28,6 +32,11 @@ public class SettingsManager {
                 if (!htmlBaseDir.exists()) {
                     if (!htmlBaseDir.mkdir()) {
                         throw new IOException("htmls 文件夹创建失败！");
+                    }
+                }
+                if(!tempCaptchaDir.exists()){
+                    if(!tempCaptchaDir.mkdir()){
+                        throw new IOException("tempCaptcha文件夹创建失败！");
                     }
                 }
             }
@@ -38,6 +47,10 @@ public class SettingsManager {
 
     public static String getHtmlBaseDirPath() {
         return htmlBaseDirPath;
+    }
+
+    public static String getTempCaptchaDirPath() {
+        return tempCaptchaDirPath;
     }
 
     public static int getCrawlerThreadsNum() {
@@ -69,5 +82,13 @@ public class SettingsManager {
             System.out.println("创建htmls文件夹失败！");
             System.exit(-1);
         }
+    }
+
+    public static void setUseRecognition(boolean use){
+        useRecognition = use;
+    }
+
+    public static boolean isUseRecognition(){
+        return useRecognition;
     }
 }
