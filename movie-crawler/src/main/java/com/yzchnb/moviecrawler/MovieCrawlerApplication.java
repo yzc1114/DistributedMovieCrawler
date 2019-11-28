@@ -23,9 +23,12 @@ public class MovieCrawlerApplication {
                 if(numOfThreads == 0){
                     throw new NumberFormatException();
                 }
+                SettingsManager.setCrawlerThreadsNum(numOfThreads);
             }
             if(args.length >= 3){
                 SettingsManager.setUseRecognition(true);
+            }else{
+                SettingsManager.setUseRecognition(false);
             }
         }catch (NumberFormatException e){
             System.out.println("输入线程数的格式不对！");

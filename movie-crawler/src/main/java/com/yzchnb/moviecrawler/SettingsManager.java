@@ -9,22 +9,19 @@ import java.util.Properties;
 
 @Component
 public class SettingsManager {
-    private static String baseDirPath;
     private static String htmlBaseDirPath;
     private static String tempCaptchaDirPath;
     private static int crawlerThreadsNum;
     private static boolean initOver = false;
-    private static boolean useRecognition = true;
+    private static boolean useRecognition = false;
     static {
         try {
             Properties props = new Properties();
             props.load(Crawler.class.getClassLoader().getResourceAsStream("settings.properties"));
-            baseDirPath = props.getProperty("baseDir");
+            String baseDirPath = props.getProperty("baseDir");
             crawlerThreadsNum = Integer.parseInt(props.getProperty("CrawlerThreadsNum"));
-            htmlBaseDirPath = baseDirPath + "htmls";
-            tempCaptchaDirPath = baseDirPath + "captchas";
-            File htmlBaseDir = new File(htmlBaseDirPath);
-            File tempCaptchaDir = new File(tempCaptchaDirPath);
+            File htmlBaseDir = new File(baseDirPath, "htmls");
+            File tempCaptchaDir = new File(baseDirPath, "captchas");
             File baseDir = new File(baseDirPath);
             if(!baseDir.exists()){
                 System.out.println("默认文件夹不存在！需要使用命令行参数获得文件夹路径。");
@@ -39,6 +36,8 @@ public class SettingsManager {
                         throw new IOException("tempCaptcha文件夹创建失败！");
                     }
                 }
+                htmlBaseDirPath = htmlBaseDir.getAbsolutePath();
+                tempCaptchaDirPath = tempCaptchaDir.getAbsolutePath();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -70,20 +69,29 @@ public class SettingsManager {
     }
 
     public static void setBaseDirPath(String path){
-        try{
-            File newPath = new File(path);
-            if(newPath.isFile() || !newPath.exists()){
-                System.out.println("需要合法的文件夹路径！");
-                throw new IOException("需要合法的文件夹路径！");
+        try {
+            File htmlBaseDir = new File(path, "htmls");
+            File tempCaptchaDir = new File(path, "captchas");
+            File baseDir = new File(path);
+            if(!baseDir.exists()){
+                System.out.println("参数路径不存在！");
+                throw new IOException("参数路径不存在！");
+            }else{
+                if (!htmlBaseDir.exists()) {
+                    if (!htmlBaseDir.mkdir()) {
+                        throw new IOException("htmls 文件夹创建失败！");
+                    }
+                }
+                if(!tempCaptchaDir.exists()){
+                    if(!tempCaptchaDir.mkdir()){
+                        throw new IOException("tempCaptcha文件夹创建失败！");
+                    }
+                }
+                htmlBaseDirPath = htmlBaseDir.getAbsolutePath();
+                tempCaptchaDirPath = tempCaptchaDir.getAbsolutePath();
             }
-            File htmlBaseDir = new File(newPath, "htmls");
-            if(!htmlBaseDir.exists()){
-                htmlBaseDir.mkdir();
-            }
-            htmlBaseDirPath = htmlBaseDir.getAbsolutePath();
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("创建htmls文件夹失败！");
             System.exit(-1);
         }
     }
