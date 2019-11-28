@@ -12,17 +12,7 @@ import java.io.File;
 @RestController
 public class WebController {
 
-    @Resource
-    private Crawler crawler;
-
     private static String htmlsBaseDirPath = SettingsManager.getHtmlBaseDirPath();
-
-
-    @RequestMapping("/crawl/{productId}")
-    @ResponseBody
-    public String crawl(@PathVariable String productId){
-        return crawler.crawlOneProduct(productId) ? "success" : "fail";
-    }
 
     @RequestMapping("/getFinishedProducts")
     @ResponseBody

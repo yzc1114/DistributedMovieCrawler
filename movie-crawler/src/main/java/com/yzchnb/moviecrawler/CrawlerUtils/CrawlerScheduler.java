@@ -32,9 +32,9 @@ public class CrawlerScheduler {
     @Resource
     private InitFinshed initFinshed;
 
-    private static int maxCrawlingNum = SettingsManager.getCrawlerThreadsNum();
-
     private int currCrawlingNum = 0;
+
+    private static int seq = 0;
 
 
     private boolean initFinished = false;
@@ -96,7 +96,7 @@ public class CrawlerScheduler {
             this.initFinished();
             return;
         }
-        if(currCrawlingNum >= maxCrawlingNum){
+        if(currCrawlingNum >= SettingsManager.getCrawlerThreadsNum()){
             return;
         }
         String productId = productIdGetter.getProductId();
@@ -105,8 +105,9 @@ public class CrawlerScheduler {
         }
         try{
             System.out.println("准备爬取：" + productId);
+            seq++; seq %= SettingsManager.getCrawlerThreadsNum();
             currCrawlingNum++;
-            if(crawler.crawlOneProduct(productId)){
+            if(crawler.crawlOneProduct(productId, SettingsManager.isUseRecognition() && seq == 0)){
                 resultResponse.sendResponse(productId, "success");
                 told = true;
             }else{

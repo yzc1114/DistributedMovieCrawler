@@ -14,7 +14,7 @@ public class SettingsManager {
     private static String tempCaptchaDirPath;
     private static int crawlerThreadsNum;
     private static boolean initOver = false;
-    private static boolean useRecognition = false;
+    private static boolean useRecognition = true;
     static {
         try {
             Properties props = new Properties();
@@ -55,6 +55,10 @@ public class SettingsManager {
 
     public static int getCrawlerThreadsNum() {
         return crawlerThreadsNum;
+    }
+
+    public static void setCrawlerThreadsNum(int i){
+        crawlerThreadsNum = i;
     }
 
     public static void setInitOver(boolean b){

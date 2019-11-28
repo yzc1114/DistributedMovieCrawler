@@ -39,14 +39,23 @@ public class Crawler {
             "Mozilla/5.0 (Windows NT 6.1; W…) Gecko/20100101 Firefox/60.0"};
 
 
+    private static String lastSuccessUa = null;
+
+    private static Map<String, String> lastSuccessCookies = new HashMap<>();
+
     private Random random = new Random();
 
-    public boolean crawlOneProduct(String productId){
+    public boolean crawlOneProduct(String productId, boolean useRecognition){
+        if(useRecognition)
+            System.out.println(productId + " 使用识别");
+        else
+            System.out.println(productId + " 不使用识别");
         String baseUrl = "https://www.amazon.com/gp/product/";
         try{
-            String ua = userAgents[random.nextInt(userAgents.length)];
+            String ua = !useRecognition || lastSuccessUa == null ? userAgents[random.nextInt(userAgents.length)] : lastSuccessUa;
             Connection.Response response;
                 response = Jsoup.connect(baseUrl + productId).timeout(30000)
+                        .cookies(useRecognition ? lastSuccessCookies : new HashMap<>())
                         .method(Connection.Method.GET)
                         .header("user-agent", ua)
                         .execute();
@@ -56,25 +65,37 @@ public class Crawler {
             Document doc = response.parse();
             if(!checkValidity(doc)){
                 System.out.println("爬取 " + productId + " 失败，原因：检测到机器人");
-                if(!SettingsManager.isUseRecognition()){
+                if(!useRecognition){
+                    setLastSuccessToNull();
                     return false;
                 }
                 doc = parseCaptchaAndSend(doc, productId, cookies, ua);
                 if(doc == null){
                     System.out.println("识别" + productId + "的验证码的过程中出现问题！");
+                    setLastSuccessToNull();
                     return false;
                 }
                 if(!checkValidity(doc)){
                     System.out.println("验证码识别：" + productId + " 验证也失败了！");
+                    setLastSuccessToNull();
                     return false;
                 }
             }
+            //success
+            lastSuccessUa = ua;
+            lastSuccessCookies = cookies;
             return saveDoc(doc, productId);
         }catch (IOException e){
             System.out.println("爬取 " + productId + " 失败，原因：连接失败");
             //e.printStackTrace();
+            setLastSuccessToNull();
             return false;
         }
+    }
+
+    private static void setLastSuccessToNull(){
+        lastSuccessCookies.clear();
+        lastSuccessUa = null;
     }
 
     private boolean checkValidity(Document doc){
@@ -201,6 +222,6 @@ public class Crawler {
 
     public static void main(String[] args) {
         Crawler crawler = new Crawler();
-        crawler.crawlOneProduct("0005445825");
+        crawler.crawlOneProduct("0005445825", true);
     }
 }

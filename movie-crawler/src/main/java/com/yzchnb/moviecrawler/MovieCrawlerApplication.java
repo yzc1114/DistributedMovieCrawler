@@ -19,9 +19,19 @@ public class MovieCrawlerApplication {
             System.out.println("使用参数路径：" + args[0]);
             SettingsManager.setBaseDirPath(args[0]);
             if(args.length >= 2){
+                int numOfThreads = Integer.parseUnsignedInt(args[1]);
+                if(numOfThreads == 0){
+                    throw new NumberFormatException();
+                }
+            }
+            if(args.length >= 3){
                 SettingsManager.setUseRecognition(true);
             }
-        }catch (ArrayIndexOutOfBoundsException e){
+        }catch (NumberFormatException e){
+            System.out.println("输入线程数的格式不对！");
+            System.exit(-1);
+        }
+        catch (ArrayIndexOutOfBoundsException e){
             System.out.println("使用默认路径");
         }
         SettingsManager.setInitOver(true);
